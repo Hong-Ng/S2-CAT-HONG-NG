@@ -10,7 +10,7 @@ with open('names.txt', 'r') as file:
 def namelength(name):
     a = 0
     for char in name:
-        a= a + 1
+        a = a + 1
     return a
 def minmaxnames(names, min, max):
     for name in names:
@@ -33,19 +33,22 @@ def pairing():
     a = 0
     b = 1   
     name = input("Enter name: ")
-    for char in name:
-        num = num+1
+    num = namelength(name)
     num = num - 1
+    pair = "#", name[a]
+    pairlist.append(pair)
     while b <= num:
-        
         pair = name[a], name[b]
         pairlist.append(pair)
         a = a+1
         b = b+1
+    pair = name[b-1], "$"
+    pairlist.append(pair)
     print (pairlist)
     
+print("Welcome to Hell")    
 while True:   
-    print("Welcome to Hell")
+    
     print("Choose an option:")
     print("1. Find the Longest and Shortest names")
     print("2. Enter a name and recieve the character pairings")
