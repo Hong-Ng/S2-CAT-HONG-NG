@@ -6,28 +6,32 @@ namequantity = 0
 freqlist = []
 namefrequency = {}
 x = 0
-
+#opening the .txt file before taking all the names out as a list
 with open('names.txt', 'r') as file:
     names = file.readlines()
     names = [name.strip() for name in names]
-
+#I forgot .len existed
 def namelength(name):
     a = 0
     for char in name:
         a = a + 1
     return a
+
 def minmaxnames(names, min, max):
     for name in names:
         a = 0
         a = namelength(name)
         namequantity = 0
         namequantity = namequantity + 1
+        #counter for the names
         if a >= max:
             maxname = name
             max = a
+            #if the length of the name exceeded the current best, then it would become the new name, else nothing would happen
         elif a <= min:
             minname = name
             min = a
+            #same here if the length of the name was shorter than the current best
     print("Number of names:", namequantity)    
     print("Longest name:", maxname + ". Shortest name:", minname)
 
