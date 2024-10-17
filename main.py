@@ -27,6 +27,7 @@ def minmaxnames(names, min, max):
 #Counter for the names
         if a >= max:
             maxname = name
+            
             max = a
 #If the length of the name exceeded the current best, then it would become the new name, else nothing would happen
         elif a <= min:
@@ -71,7 +72,42 @@ def wheelspin():
     return r.choices(spinner,spinner_probs)
 #Same as the coin toss
 
-while True:   
+for name in names:
+            freq = pairing(name)
+            for name in freq:
+                if name in namefrequency:
+                    namefrequency[name] = namefrequency[name] + 1
+                else:
+                    namefrequency[name] = 1 
+for key in namefrequency: 
+    if key[0] in keyfrequency:
+        keyfrequency[key[0]] = namefrequency[key] + keyfrequency[key[0]]
+    else:
+        keyfrequency[key[0]] = namefrequency[key]
+
+def pairfind(namefrequency):
+    letter = input("Enter the letter you wish to find: ")
+
+    for key, value in namefrequency.items():
+        if key[0] == letter:
+            print(key, ':', value)
+
+def name_prob(namefrequency, keyfrequency):
+    final = 1
+    OGname = input("Enter Name: ").lower()
+    paired_name = pairing(OGname)
+    overall_probability = []
+    for name in paired_name:
+        denominator = keyfrequency[name[0]]
+        numerator = namefrequency[name]
+        probability = numerator/denominator
+        overall_probability.append(probability)
+        print("Probability of", name , ":", probability, '%')
+    for num in overall_probability:
+        final = final*num
+    print("The overall probability of", OGname, "is:", final,'%')
+
+while True:
     print("Choose an option:")
     print("1. Find the Longest and Shortest names")
     print("2. Enter a name and recieve the character pairings")
@@ -87,25 +123,14 @@ while True:
         name = input("Enter name: ")
         print(pairing(name))
     elif inputs == 3:
-        for name in names:
-            freq = pairing(name)
-            for name in freq:
-                if name in namefrequency:
-                    namefrequency[name] = namefrequency[name] + 1
-                else:
-                    namefrequency[name] = 1
-        with open('pair_freq_sorted.txt', 'w') as file:
+        
+        with open('pair_freqs_raw.txt', 'w') as file:
             for key, value in namefrequency.items():
                 file.write(f"{key}: {value}\n")
-        for key in namefrequency:
-            print(key[0])
-            if key[0] in keyfrequency:
-                keyfrequency[key[0]] = namefrequency[key] + keyfrequency[key[0]]
-            else:
-                keyfrequency[key[0]] = namefrequency[key]
         with open('Starting_Character_Freq.txt', 'w') as file:
             for key, value in keyfrequency.items():
                 file.write(f"{key}: {value}\n")
+
     elif inputs == 4:
         i = 1
         while i < 21:
