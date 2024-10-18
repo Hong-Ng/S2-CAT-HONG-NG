@@ -114,6 +114,9 @@ while True:
     print("3. Recieve all character pairings")
     print("4. Weighted Coin Toss")
     print("5. Wheel Spin")
+    print("6. Print all pairs starting with the letter...")
+    print("7. Enter a name and find the probabiltiy of it")
+    
     print("TO QUIT ENTER 0")
 #Menu
     inputs = int(input())
@@ -132,15 +135,13 @@ while True:
                 file.write(f"{key}: {value}\n")
 
     elif inputs == 4:
-        i = 1
-        while i < 21:
-            print(cointoss())
-            i = i + 1
+        print(cointoss())
     elif inputs == 5:
-        i = 1
-        while i < 21:
-            print(wheelspin())
-            i = i + 1
+        print(wheelspin())
+    elif inputs == 6:
+        pairfind(namefrequency)
+    elif inputs == 7:
+        name_prob(namefrequency, keyfrequency)
 #If the user enters a number on the menu it will them excute the function accordingly
     elif inputs == 0:
         break
